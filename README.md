@@ -13,28 +13,34 @@ cp .env.example .env
 docker compose up --build
 ```
 
+This starts PostgreSQL, runs Drizzle migrations, then the API and worker.
+
 - API / Swagger: http://localhost:${PORT}/docs (default **8000**)
-- PostgreSQL on the host: `localhost:${POSTGRES_HOST_PORT}` (default **55432**)
+- PostgreSQL on the host: `localhost:${POSTGRES_PORT}` (default **55432**)
+- Worker: same image, `node dist/worker.js` (idle until import processing is added)
 
 Change values in `.env` only. Do not put passwords in the Dockerfile or commit `.env`.
 
 ## Local development
 
-Start Postgres only, then the API (uses `DATABASE_URL` with `localhost` from `.env`):
+Start Postgres and migrations, then the API (uses `DATABASE_URL` with `localhost` from `.env`):
 
 ```bash
 docker compose up database -d
 cp .env.example .env
 npm install
+npm run db:migrate
 npm run start:dev
+npm run start:worker:dev
 ```
 
 ## Database (Drizzle)
 
-Schema and migrations are added in a later commit. The Drizzle client is wired to `DATABASE_URL`.
+Schema lives in `src/infra/db/schema.ts`. Migrations are committed under `drizzle/`.
 
 ```bash
 npm run db:generate
 npm run db:migrate
 ```
-# srnode-asgnmt
+
+HTTP errors use `{ error: { code, message, requestId } }` and never include stack traces.

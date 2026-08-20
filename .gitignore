@@ -16,11 +16,13 @@ npm-debug.log*
 # tests
 /coverage
 
+# local upload store
+/data
+
 # OS / IDE
 .DS_Store
 .idea
 .vscode/*
 !.vscode/extensions.json
 
-# drizzle generated (keep committed SQL migrations in /drizzle)
 *.tsbuildinfo

@@ -17,6 +17,8 @@ RUN addgroup -S app && adduser -S app -G app
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY package.json ./
+COPY drizzle ./drizzle
+RUN mkdir -p /data/uploads && chown -R app:app /app /data
 USER app
 EXPOSE 8000
 CMD ["node", "dist/main.js"]
