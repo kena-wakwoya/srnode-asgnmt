@@ -1,0 +1,26 @@
+# compiled output
+/dist
+/node_modules
+/build
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+# env
+.env
+.env.local
+.env.*.local
+
+# tests
+/coverage
+
+# OS / IDE
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# drizzle generated (keep committed SQL migrations in /drizzle)
+*.tsbuildinfo
